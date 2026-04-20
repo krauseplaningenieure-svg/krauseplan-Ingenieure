@@ -8,7 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
+ 
     :root {
       --navy:   #0d1b2a;
       --steel:  #1b3a5c;
@@ -19,9 +19,9 @@
       --gray:   #6b7280;
       --radius: 4px;
     }
-
+ 
     html { scroll-behavior: smooth; }
-
+ 
     body {
       font-family: 'DM Sans', sans-serif;
       background: var(--light);
@@ -29,7 +29,7 @@
       font-size: 16px;
       line-height: 1.6;
     }
-
+ 
     /* ── NAV ── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
@@ -52,7 +52,7 @@
     .nav-links a:hover { opacity: 1; color: var(--gold); }
     .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
     .hamburger span { width: 24px; height: 2px; background: var(--white); display: block; transition: 0.3s; }
-
+ 
     /* ── HERO ── */
     #hero {
       min-height: 100vh;
@@ -120,7 +120,7 @@
     .btn-gold:hover { background: var(--gold2); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(200,168,75,0.35); }
     .btn-outline { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,0.35); }
     .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
-
+ 
     .hero-stats {
       position: absolute; bottom: 3rem; right: 5%;
       display: flex; gap: 3rem;
@@ -130,7 +130,7 @@
     .stat { text-align: right; }
     .stat-num { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--gold); line-height: 1; }
     .stat-label { font-size: 0.75rem; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 4px; }
-
+ 
     /* ── SECTIONS GENERIC ── */
     section { padding: 6rem 5%; }
     .section-label {
@@ -148,7 +148,7 @@
     }
     h2.light { color: var(--white); }
     .lead { font-size: 1.1rem; color: var(--gray); font-weight: 300; max-width: 600px; line-height: 1.8; margin-bottom: 3rem; }
-
+ 
     /* ── LEISTUNGEN ── */
     #leistungen { background: var(--white); }
     .cards-grid {
@@ -199,7 +199,7 @@
       border-radius: 2px;
       font-weight: 500;
     }
-
+ 
     /* ── ÜBER UNS ── */
     #ueber { background: var(--light); }
     .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
@@ -248,7 +248,7 @@
       padding: 8px 14px;
       border-radius: 2px;
     }
-
+ 
     /* ── PROZESS ── */
     #prozess { background: var(--navy); }
     .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2px; margin-top: 3rem; }
@@ -267,7 +267,7 @@
     }
     .step h3 { font-size: 1rem; color: var(--white); margin-bottom: 0.6rem; font-weight: 500; }
     .step p { font-size: 0.87rem; color: rgba(255,255,255,0.5); line-height: 1.7; }
-
+ 
     /* ── KONTAKT ── */
     #kontakt { background: var(--white); }
     .kontakt-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
@@ -301,7 +301,7 @@
     .form-group textarea:focus,
     .form-group select:focus { border-color: var(--gold); }
     .form-group textarea { resize: vertical; min-height: 130px; }
-
+ 
     /* ── FOOTER ── */
     footer {
       background: var(--navy);
@@ -316,7 +316,7 @@
     footer p { color: rgba(255,255,255,0.4); font-size: 0.82rem; }
     footer a { color: rgba(255,255,255,0.4); font-size: 0.82rem; text-decoration: none; margin-left: 1.5rem; }
     footer a:hover { color: var(--gold); }
-
+ 
     /* ── ANIMS ── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(30px); }
@@ -327,7 +327,7 @@
       transition: opacity 0.7s ease, transform 0.7s ease;
     }
     .reveal.visible { opacity: 1; transform: none; }
-
+ 
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
       .nav-links { display: none; }
@@ -341,7 +341,7 @@
   </style>
 </head>
 <body>
-
+ 
 <!-- NAV -->
 <nav>
   <a class="nav-logo" href="#hero">
@@ -358,7 +358,7 @@
     <span></span><span></span><span></span>
   </div>
 </nav>
-
+ 
 <!-- HERO -->
 <section id="hero">
   <div class="hero-bg"></div>
@@ -374,17 +374,17 @@
       <a href="#leistungen" class="btn btn-outline">Leistungen ansehen</a>
     </div>
   </div>
-
+ 
 </section>
-
+ 
 <!-- LEISTUNGEN -->
 <section id="leistungen">
   <div class="section-label">Was wir leisten</div>
   <h2>Unsere Leistungen</h2>
   <p class="lead">Von der Planung bis zur Umsetzung – wir bieten alle Ingenieurdienstleistungen aus einer Hand.</p>
-
+ 
   <div class="cards-grid reveal">
-
+ 
     <div class="card">
       <div class="card-icon">⚡</div>
       <h3>Energieberatung</h3>
@@ -395,7 +395,7 @@
         <span class="tag">BAFA</span>
       </div>
     </div>
-
+ 
     <div class="card">
       <div class="card-icon">🏗️</div>
       <h3>Sanierungsplanung</h3>
@@ -406,7 +406,7 @@
         <span class="tag">Haustechnik</span>
       </div>
     </div>
-
+ 
     <div class="card">
       <div class="card-icon">🔍</div>
       <h3>Bauüberwachung</h3>
@@ -417,7 +417,7 @@
         <span class="tag">Mängelmanagement</span>
       </div>
     </div>
-
+ 
     <div class="card">
       <div class="card-icon">🗺️</div>
       <h3>Individueller Sanierungsfahrplan</h3>
@@ -428,7 +428,7 @@
         <span class="tag">15% Extra-Förderung</span>
       </div>
     </div>
-
+ 
     <div class="card">
       <div class="card-icon">🏠</div>
       <h3>Immobilienbewertung</h3>
@@ -439,7 +439,7 @@
         <span class="tag">ImmoWertV</span>
       </div>
     </div>
-
+ 
     <div class="card">
       <div class="card-icon">📄</div>
       <h3>Energieausweis</h3>
@@ -450,10 +450,10 @@
         <span class="tag">GEG-konform</span>
       </div>
     </div>
-
+ 
   </div>
 </section>
-
+ 
 <!-- ÜBER UNS -->
 <section id="ueber">
   <div class="two-col">
@@ -503,7 +503,7 @@
     </div>
   </div>
 </section>
-
+ 
 <!-- PROZESS -->
 <section id="prozess">
   <div class="section-label" style="color:var(--gold);">Wie wir arbeiten</div>
@@ -536,7 +536,7 @@
     </div>
   </div>
 </section>
-
+ 
 <!-- KONTAKT -->
 <section id="kontakt">
   <div class="section-label">Jetzt starten</div>
@@ -577,7 +577,7 @@
         </div>
       </div>
     </div>
-
+ 
     <div class="kontakt-form reveal">
       <div class="form-row">
         <div class="form-group">
@@ -619,7 +619,7 @@
     </div>
   </div>
 </section>
-
+ 
 <!-- IMPRESSUM -->
 <section id="impressum" style="background:var(--light); padding:4rem 5%;">
   <div class="section-label">Rechtliches</div>
@@ -651,17 +651,73 @@
     </div>
   </div>
 </section>
-
+ 
+<!-- DATENSCHUTZ -->
+<section id="datenschutz" style="background:var(--white); padding:4rem 5%;">
+  <div class="section-label">Rechtliches</div>
+  <h2>Datenschutzerklärung</h2>
+  <div style="max-width:700px; margin-top:2rem; display:flex; flex-direction:column; gap:1.5rem; font-size:0.95rem; color:var(--navy); line-height:1.8;">
+ 
+    <div>
+      <strong>1. Verantwortlicher</strong><br/>
+      Verantwortlicher im Sinne der Datenschutz-Grundverordnung (DSGVO) ist:<br/><br/>
+      Krause Plan Ingenieure<br/>
+      Ing. Daniel Krause<br/>
+      Grabenstraße 12, 15370 Fredersdorf<br/>
+      Telefon: +49 (0) 155 609 716 17<br/>
+      E-Mail: krauseplan.ingenieure@gmail.com
+    </div>
+ 
+    <div>
+      <strong>2. Erhebung und Speicherung personenbezogener Daten</strong><br/>
+      Beim Besuch unserer Website werden automatisch Informationen in sogenannten Server-Log-Dateien gespeichert, die Ihr Browser automatisch übermittelt. Dies sind: Browsertyp und -version, verwendetes Betriebssystem, Referrer-URL, Hostname des zugreifenden Rechners sowie Uhrzeit der Serveranfrage. Diese Daten sind nicht bestimmten Personen zuordenbar und werden nicht mit anderen Datenquellen zusammengeführt.
+    </div>
+ 
+    <div>
+      <strong>3. Kontaktformular</strong><br/>
+      Wenn Sie uns per Kontaktformular oder E-Mail Anfragen zukommen lassen, werden Ihre Angaben aus dem Anfrageformular inklusive der von Ihnen angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter. Die Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO.
+    </div>
+ 
+    <div>
+      <strong>4. Keine Weitergabe an Dritte</strong><br/>
+      Wir verkaufen, handeln oder übertragen Ihre personenbezogenen Daten nicht an Dritte. Dies gilt nicht für vertrauenswürdige Dritte, die uns bei der Durchführung unserer Website oder unseres Geschäfts unterstützen, sofern diese Parteien zustimmen, diese Informationen vertraulich zu behandeln.
+    </div>
+ 
+    <div>
+      <strong>5. Ihre Rechte</strong><br/>
+      Sie haben jederzeit das Recht auf:<br/>
+      – Auskunft über Ihre bei uns gespeicherten Daten (Art. 15 DSGVO)<br/>
+      – Berichtigung unrichtiger Daten (Art. 16 DSGVO)<br/>
+      – Löschung Ihrer Daten (Art. 17 DSGVO)<br/>
+      – Einschränkung der Verarbeitung (Art. 18 DSGVO)<br/>
+      – Datenübertragbarkeit (Art. 20 DSGVO)<br/>
+      – Widerspruch gegen die Verarbeitung (Art. 21 DSGVO)<br/><br/>
+      Zur Ausübung Ihrer Rechte wenden Sie sich bitte an: krauseplan.ingenieure@gmail.com
+    </div>
+ 
+    <div>
+      <strong>6. Beschwerderecht</strong><br/>
+      Sie haben das Recht, sich bei der zuständigen Aufsichtsbehörde zu beschweren. Die zuständige Aufsichtsbehörde in Brandenburg ist der Landesbeauftragte für den Datenschutz und für das Recht auf Akteneinsicht Brandenburg.
+    </div>
+ 
+    <div>
+      <strong>7. Aktualität dieser Datenschutzerklärung</strong><br/>
+      Diese Datenschutzerklärung ist aktuell gültig und hat den Stand April 2025.
+    </div>
+ 
+  </div>
+</section>
+ 
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo">Krause Plan Ingenieure</div>
   <p>© 2025 Krause Plan Ingenieure. Alle Rechte vorbehalten.</p>
   <div>
     <a href="#impressum">Impressum</a>
-    <a href="#">Datenschutz</a>
+    <a href="#datenschutz">Datenschutz</a>
   </div>
 </footer>
-
+ 
 <script>
   // Scroll-reveal
   const reveals = document.querySelectorAll('.reveal');
@@ -672,3 +728,4 @@
 </script>
 </body>
 </html>
+ 
