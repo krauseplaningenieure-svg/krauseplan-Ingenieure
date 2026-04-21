@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Krause Plan Ingenieure – Energieberatung & Sanierung</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #0d1b2a;
+      --steel:  #1b3a5c;
+      --gold:   #c8a84b;
+      --gold2:  #e8c96a;
+      --light:  #f4f1eb;
+      --white:  #ffffff;
+      --gray:   #6b7280;
+      --radius: 4px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--light);
+      color: var(--navy);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: var(--navy);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%;
+      height: 70px;
+      border-bottom: 2px solid var(--gold);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: var(--gold);
+      letter-spacing: 0.05em;
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--white); font-weight: 300; font-size: 0.85rem; display: block; letter-spacing: 0.15em; font-family: 'DM Sans', sans-serif; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--white); text-decoration: none; font-size: 0.88rem; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.85; transition: opacity 0.2s, color 0.2s; }
+    .nav-links a:hover { opacity: 1; color: var(--gold); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { width: 24px; height: 2px; background: var(--white); display: block; transition: 0.3s; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      background: var(--navy);
+      display: flex; align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding: 0 5%;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(200,168,75,0.12) 0%, transparent 60%),
+                  linear-gradient(135deg, #0d1b2a 0%, #1b3a5c 100%);
+    }
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(200,168,75,0.05) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(200,168,75,0.05) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .hero-content {
+      position: relative; z-index: 1;
+      max-width: 700px;
+      animation: fadeUp 0.9s ease both;
+    }
+    .hero-eyebrow {
+      color: var(--gold);
+      font-size: 0.8rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      display: flex; align-items: center; gap: 0.8rem;
+    }
+    .hero-eyebrow::before { content: ''; width: 40px; height: 1px; background: var(--gold); }
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 5vw, 4.2rem);
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+    h1 em { color: var(--gold); font-style: normal; }
+    .hero-sub {
+      color: rgba(255,255,255,0.7);
+      font-size: 1.1rem;
+      font-weight: 300;
+      max-width: 520px;
+      margin-bottom: 2.5rem;
+      line-height: 1.8;
+    }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn {
+      padding: 14px 32px;
+      border-radius: var(--radius);
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.25s;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-gold { background: var(--gold); color: var(--navy); }
+    .btn-gold:hover { background: var(--gold2); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(200,168,75,0.35); }
+    .btn-outline { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,0.35); }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+
+    .hero-stats {
+      position: absolute; bottom: 3rem; right: 5%;
+      display: flex; gap: 3rem;
+      z-index: 1;
+      animation: fadeUp 1.1s ease both;
+    }
+    .stat { text-align: right; }
+    .stat-num { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--gold); line-height: 1; }
+    .stat-label { font-size: 0.75rem; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 4px; }
+
+    /* ── SECTIONS GENERIC ── */
+    section { padding: 6rem 5%; }
+    .section-label {
+      font-size: 0.75rem; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.8rem;
+      display: flex; align-items: center; gap: 0.8rem;
+    }
+    .section-label::before { content: ''; width: 30px; height: 1px; background: var(--gold); }
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      color: var(--navy);
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    h2.light { color: var(--white); }
+    .lead { font-size: 1.1rem; color: var(--gray); font-weight: 300; max-width: 600px; line-height: 1.8; margin-bottom: 3rem; }
+
+    /* ── LEISTUNGEN ── */
+    #leistungen { background: var(--white); }
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5px;
+      background: rgba(13,27,42,0.08);
+      border: 1.5px solid rgba(13,27,42,0.08);
+    }
+    .card {
+      background: var(--white);
+      padding: 2.5rem 2rem;
+      transition: background 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .card::before {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transition: transform 0.3s;
+    }
+    .card:hover { background: #faf9f6; }
+    .card:hover::before { transform: scaleX(1); }
+    .card-icon {
+      width: 52px; height: 52px;
+      background: var(--navy);
+      border-radius: 2px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.5rem;
+      font-size: 1.5rem;
+    }
+    .card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: var(--navy);
+      margin-bottom: 0.75rem;
+    }
+    .card p { font-size: 0.92rem; color: var(--gray); line-height: 1.7; }
+    .card-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 1.2rem; }
+    .tag {
+      font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 4px 10px;
+      background: rgba(200,168,75,0.12);
+      color: #8a6e1a;
+      border-radius: 2px;
+      font-weight: 500;
+    }
+
+    /* ── ÜBER UNS ── */
+    #ueber { background: var(--light); }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .feature-list { list-style: none; display: flex; flex-direction: column; gap: 1.2rem; margin-top: 2rem; }
+    .feature-list li {
+      display: flex; align-items: flex-start; gap: 1rem;
+      font-size: 0.95rem; color: var(--navy);
+    }
+    .feat-icon {
+      width: 32px; height: 32px; min-width: 32px;
+      background: var(--navy);
+      border-radius: 2px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem;
+    }
+    .feat-text strong { display: block; font-weight: 500; margin-bottom: 2px; }
+    .feat-text span { font-size: 0.88rem; color: var(--gray); }
+    .visual-block {
+      background: var(--navy);
+      border-radius: 4px;
+      padding: 3rem;
+      position: relative;
+      overflow: hidden;
+      min-height: 380px;
+      display: flex; flex-direction: column; justify-content: flex-end;
+    }
+    .visual-block::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse at 30% 30%, rgba(200,168,75,0.2), transparent 60%);
+    }
+    .visual-text {
+      position: relative; z-index: 1;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      color: var(--white);
+      line-height: 1.3;
+    }
+    .visual-text span { color: var(--gold); }
+    .visual-badge {
+      position: absolute; top: 2rem; right: 2rem;
+      background: var(--gold);
+      color: var(--navy);
+      font-size: 0.7rem; font-weight: 600;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      padding: 8px 14px;
+      border-radius: 2px;
+    }
+
+    /* ── PROZESS ── */
+    #prozess { background: var(--navy); }
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2px; margin-top: 3rem; }
+    .step {
+      padding: 2.5rem 2rem;
+      border-left: 2px solid rgba(200,168,75,0.2);
+      transition: border-color 0.3s;
+    }
+    .step:hover { border-color: var(--gold); }
+    .step-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      color: rgba(200,168,75,0.25);
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+    .step h3 { font-size: 1rem; color: var(--white); margin-bottom: 0.6rem; font-weight: 500; }
+    .step p { font-size: 0.87rem; color: rgba(255,255,255,0.5); line-height: 1.7; }
+
+    /* ── KONTAKT ── */
+    #kontakt { background: var(--white); }
+    .kontakt-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .kontakt-info { display: flex; flex-direction: column; gap: 1.5rem; margin-top: 2rem; }
+    .info-item { display: flex; gap: 1rem; align-items: flex-start; }
+    .info-icon {
+      width: 42px; height: 42px; min-width: 42px;
+      background: var(--navy); border-radius: 2px;
+      display: flex; align-items: center; justify-content: center; font-size: 1rem;
+    }
+    .info-item h4 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin-bottom: 3px; }
+    .info-item p { font-size: 0.95rem; color: var(--navy); }
+    .kontakt-form { display: flex; flex-direction: column; gap: 1rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gray); }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      padding: 12px 16px;
+      border: 1.5px solid rgba(13,27,42,0.15);
+      border-radius: var(--radius);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      background: var(--light);
+      color: var(--navy);
+      transition: border-color 0.2s;
+      outline: none;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus { border-color: var(--gold); }
+    .form-group textarea { resize: vertical; min-height: 130px; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy);
+      padding: 3rem 5%;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+      border-top: 1px solid rgba(200,168,75,0.3);
+    }
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      color: var(--gold); font-size: 1.1rem;
+    }
+    footer p { color: rgba(255,255,255,0.4); font-size: 0.82rem; }
+    footer a { color: rgba(255,255,255,0.4); font-size: 0.82rem; text-decoration: none; margin-left: 1.5rem; }
+    footer a:hover { color: var(--gold); }
+
+    /* ── ANIMS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .reveal {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 70px; left: 0; right: 0; background: var(--navy); padding: 1.5rem 5%; gap: 1rem; border-top: 1px solid rgba(200,168,75,0.2); }
+      .hamburger { display: flex; }
+      .hero-stats { position: static; margin-top: 3rem; justify-content: flex-start; }
+      .two-col, .kontakt-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .form-row { grid-template-columns: 1fr; }
+      section { padding: 4rem 5%; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#hero">
+    <img src="https://raw.githubusercontent.com/krauseplaningenieure-svg/Krauseplan-Ingenieure/main/Logo.png" alt="Krause Plan Ingenieure Logo" style="height:45px; width:auto; vertical-align:middle; margin-right:10px;" />
+    Krause Plan Ingenieure
+    <span>Ing. Daniel Krause – Ihr Partner für Bau & Energie</span>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#leistungen">Leistungen</a></li>
+    <li><a href="#ueber">Über uns</a></li>
+    <li><a href="#prozess">Vorgehen</a></li>
+    <li><a href="#kontakt">Kontakt</a></li>
+  </ul>
+  <div class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Zugelassenes Ingenieurbüro</div>
+    <h1>Energie. Bau.<br/><em>Expertise.</em></h1>
+    <p class="hero-sub">
+      Wir begleiten Ihr Bauvorhaben von der Energieberatung über die Sanierungsplanung bis zur Immobilienbewertung – kompetent, termingerecht und transparent.
+    </p>
+    <div class="hero-btns">
+      <a href="#kontakt" class="btn btn-gold">Beratung anfragen</a>
+      <a href="#leistungen" class="btn btn-outline">Leistungen ansehen</a>
+    </div>
+  </div>
+
+</section>
+
+<!-- LEISTUNGEN -->
+<section id="leistungen">
+  <div class="section-label">Was wir leisten</div>
+  <h2>Unsere Leistungen</h2>
+  <p class="lead">Von der Planung bis zur Umsetzung – wir bieten alle Ingenieurdienstleistungen aus einer Hand.</p>
+
+  <div class="cards-grid reveal">
+
+    <div class="card">
+      <div class="card-icon">⚡</div>
+      <h3>Energieberatung</h3>
+      <p>Individuelle Energieanalyse Ihrer Immobilie mit konkreten Einsparpotenzial-Berechnungen und Fördermittelberatung (BAFA, KfW).</p>
+      <div class="card-tags">
+        <span class="tag">Gebäudeenergiegesetz</span>
+        <span class="tag">KfW-Förderung</span>
+        <span class="tag">BAFA</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-icon">🏗️</div>
+      <h3>Sanierungsplanung</h3>
+      <p>Ganzheitliche Sanierungskonzepte für Wohn- und Gewerbeimmobilien – von der Planung über Ausführung bis zur Abnahme.</p>
+      <div class="card-tags">
+        <span class="tag">Wärmedämmung</span>
+        <span class="tag">Fenster & Türen</span>
+        <span class="tag">Haustechnik</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-icon">🔍</div>
+      <h3>Bauüberwachung</h3>
+      <p>Professionelle Qualitätssicherung auf der Baustelle. Wir überwachen Termine, Kosten und Qualität Ihres Bauprojekts zuverlässig.</p>
+      <div class="card-tags">
+        <span class="tag">SiGeKo</span>
+        <span class="tag">LPH 8 HOAI</span>
+        <span class="tag">Mängelmanagement</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-icon">🗺️</div>
+      <h3>Individueller Sanierungsfahrplan</h3>
+      <p>Maßgeschneiderte Schritt-für-Schritt-Planung Ihrer energetischen Sanierung – priorisiert nach Budget, Einsparpotenzial und Förderfähigkeit.</p>
+      <div class="card-tags">
+        <span class="tag">iSFP</span>
+        <span class="tag">Stufenweise Sanierung</span>
+        <span class="tag">15% Extra-Förderung</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-icon">🏠</div>
+      <h3>Immobilienbewertung</h3>
+      <p>Zertifizierte Verkehrswertgutachten für Kauf, Verkauf, Erbschaft, Scheidung oder Kreditvergabe – nach ImmoWertV.</p>
+      <div class="card-tags">
+        <span class="tag">Verkehrswert</span>
+        <span class="tag">Beleihungswert</span>
+        <span class="tag">ImmoWertV</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-icon">📄</div>
+      <h3>Energieausweis</h3>
+      <p>Bedarfs- und Verbrauchsausweise für Wohn- und Nichtwohngebäude – rechtssicher und schnell ausgestellt.</p>
+      <div class="card-tags">
+        <span class="tag">Bedarfsausweis</span>
+        <span class="tag">Verbrauchsausweis</span>
+        <span class="tag">GEG-konform</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ÜBER UNS -->
+<section id="ueber">
+  <div class="two-col">
+    <div class="reveal">
+      <div class="section-label">Wer wir sind</div>
+      <h2>Erfahrung trifft<br/>Verantwortung</h2>
+      <p style="color:var(--gray); font-size:1rem; line-height:1.8; margin-bottom:1.5rem;">
+        Als unabhängiges Ingenieurbüro verbinden wir technische Exzellenz mit persönlicher Beratung. Jedes Projekt behandeln wir individuell – mit dem Ziel, für unsere Kunden die beste Lösung zu erarbeiten.
+      </p>
+      <ul class="feature-list">
+        <li>
+          <div class="feat-icon">✔</div>
+          <div class="feat-text">
+            <strong>Zertifizierte Energieberater</strong>
+            <span>BAFA-zugelassen, dena-Energie-Effizienz-Experten</span>
+          </div>
+        </li>
+        <li>
+          <div class="feat-icon">✔</div>
+          <div class="feat-text">
+            <strong>Zertifizierter Sachverständiger</strong>
+            <span>Anerkannte Gutachten für Immobilienbewertung und Energieberatung</span>
+          </div>
+        </li>
+        <li>
+          <div class="feat-icon">✔</div>
+          <div class="feat-text">
+            <strong>Unabhängige Beratung</strong>
+            <span>Herstellerneutral, transparent und auf Ihre Interessen ausgerichtet</span>
+          </div>
+        </li>
+        <li>
+          <div class="feat-icon">✔</div>
+          <div class="feat-text">
+            <strong>Komplette Sanierungsbegleitung</strong>
+            <span>Von der ersten Idee bis zur abgeschlossenen Sanierung</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="visual-block reveal">
+      <div class="visual-badge">Unabhängig & Zertifiziert</div>
+      <div class="visual-text">
+        Ihr Gebäude.<br/>
+        Unsere <span>Verantwortung</span>.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROZESS -->
+<section id="prozess">
+  <div class="section-label" style="color:var(--gold);">Wie wir arbeiten</div>
+  <h2 class="light">Unser Vorgehen</h2>
+  <div class="steps reveal">
+    <div class="step">
+      <div class="step-num">01</div>
+      <h3>Erstgespräch</h3>
+      <p>Kostenlose Erstberatung – wir hören zu und verstehen Ihr Projekt und Ihre Ziele.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <h3>Analyse & Konzept</h3>
+      <p>Technische Bestandsaufnahme, Bedarfsermittlung und Erarbeitung eines maßgeschneiderten Konzepts.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <h3>Planung & Antrag</h3>
+      <p>Detailplanung, Ausschreibung und Stellung aller nötigen Förderanträge bei KfW und BAFA.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <h3>Umsetzung & Kontrolle</h3>
+      <p>Bauüberwachung und laufende Qualitätssicherung bis zur erfolgreichen Abnahme.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">05</div>
+      <h3>Dokumentation</h3>
+      <p>Vollständige Übergabedokumentation, Gutachten und Bestätigungen für Fördermittelgeber.</p>
+    </div>
+  </div>
+</section>
+
+<!-- KONTAKT -->
+<section id="kontakt">
+  <div class="section-label">Jetzt starten</div>
+  <h2>Kontakt aufnehmen</h2>
+  <div class="kontakt-grid">
+    <div class="reveal">
+      <p style="color:var(--gray); font-size:1rem; line-height:1.8; margin-bottom:2rem;">
+        Sie haben ein Projekt, eine Frage oder möchten ein kostenloses Erstgespräch vereinbaren? Wir freuen uns auf Ihre Nachricht.
+      </p>
+      <div class="kontakt-info">
+        <div class="info-item">
+          <div class="info-icon">📍</div>
+          <div>
+            <h4>Adresse</h4>
+            <p>Grabenstraße 12, 15370 Fredersdorf</p>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">📞</div>
+          <div>
+            <h4>Telefon</h4>
+            <p>+49 (0) 155 609 716 17</p>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">✉️</div>
+          <div>
+            <h4>E-Mail</h4>
+            <p>krauseplan.ingenieure@gmail.com</p>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">🕐</div>
+          <div>
+            <h4>Öffnungszeiten</h4>
+            <p>Mo–Fr: 08:00 – 18:00 Uhr</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <form class="kontakt-form reveal" action="https://formspree.io/f/xojynkbv" method="POST">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Vorname</label>
+          <input type="text" name="vorname" placeholder="Max" required />
+        </div>
+        <div class="form-group">
+          <label>Nachname</label>
+          <input type="text" name="nachname" placeholder="Mustermann" required />
+        </div>
+      </div>
+      <div class="form-group">
+        <label>E-Mail</label>
+        <input type="email" name="email" placeholder="max@beispiel.de" required />
+      </div>
+      <div class="form-group">
+        <label>Telefon (optional)</label>
+        <input type="tel" name="telefon" placeholder="+49 ..." />
+      </div>
+      <div class="form-group">
+        <label>Leistung</label>
+        <select name="leistung">
+          <option value="">Bitte wählen...</option>
+          <option>Energieberatung</option>
+          <option>Sanierungsplanung</option>
+          <option>Individueller Sanierungsfahrplan (iSFP)</option>
+          <option>Bauüberwachung</option>
+          <option>Immobilienbewertung</option>
+          <option>Energieausweis</option>
+          <option>Sonstiges</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Nachricht</label>
+        <textarea name="nachricht" placeholder="Beschreiben Sie kurz Ihr Anliegen..."></textarea>
+      </div>
+      <button type="submit" class="btn btn-gold">Anfrage senden</button>
+      <p style="font-size:0.78rem; color:var(--gray); margin-top:0.5rem;">Mit dem Absenden stimmen Sie unserer Datenschutzerklärung zu.</p>
+    </form>
+  </div>
+</section>
+
+<!-- IMPRESSUM -->
+<section id="impressum" style="background:var(--light); padding:4rem 5%;">
+  <div class="section-label">Rechtliches</div>
+  <h2>Impressum</h2>
+  <div style="max-width:600px; margin-top:2rem; display:flex; flex-direction:column; gap:1.2rem; font-size:0.95rem; color:var(--navy); line-height:1.8;">
+    <div>
+      <strong>Angaben gemäß § 5 TMG</strong><br/>
+      Krause Plan Ingenieure<br/>
+      Ing. Daniel Krause<br/>
+      Grabenstraße 12<br/>
+      15370 Fredersdorf
+    </div>
+    <div>
+      <strong>Kontakt</strong><br/>
+      Telefon: +49 (0) 155 609 716 17<br/>
+      E-Mail: krauseplan.ingenieure@gmail.com
+    </div>
+    <div>
+      <strong>Berufsbezeichnung</strong><br/>
+      Bauingenieur (verliehen in der Bundesrepublik Deutschland)
+    </div>
+    <div>
+      <strong>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</strong><br/>
+      Ing. Daniel Krause, Grabenstraße 12, 15370 Fredersdorf
+    </div>
+    <div style="font-size:0.85rem; color:var(--gray);">
+      <strong>Haftungshinweis</strong><br/>
+      Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung für die Inhalte externer Links. Für den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich.
+    </div>
+  </div>
+</section>
+
+<!-- DATENSCHUTZ -->
+<section id="datenschutz" style="background:var(--white); padding:4rem 5%;">
+  <div class="section-label">Rechtliches</div>
+  <h2>Datenschutzerklärung</h2>
+  <div style="max-width:700px; margin-top:2rem; display:flex; flex-direction:column; gap:1.5rem; font-size:0.95rem; color:var(--navy); line-height:1.8;">
+
+    <div>
+      <strong>1. Verantwortlicher</strong><br/>
+      Verantwortlicher im Sinne der Datenschutz-Grundverordnung (DSGVO) ist:<br/><br/>
+      Krause Plan Ingenieure<br/>
+      Ing. Daniel Krause<br/>
+      Grabenstraße 12, 15370 Fredersdorf<br/>
+      Telefon: +49 (0) 155 609 716 17<br/>
+      E-Mail: krauseplan.ingenieure@gmail.com
+    </div>
+
+    <div>
+      <strong>2. Erhebung und Speicherung personenbezogener Daten</strong><br/>
+      Beim Besuch unserer Website werden automatisch Informationen in sogenannten Server-Log-Dateien gespeichert, die Ihr Browser automatisch übermittelt. Dies sind: Browsertyp und -version, verwendetes Betriebssystem, Referrer-URL, Hostname des zugreifenden Rechners sowie Uhrzeit der Serveranfrage. Diese Daten sind nicht bestimmten Personen zuordenbar und werden nicht mit anderen Datenquellen zusammengeführt.
+    </div>
+
+    <div>
+      <strong>3. Kontaktformular</strong><br/>
+      Wenn Sie uns per Kontaktformular oder E-Mail Anfragen zukommen lassen, werden Ihre Angaben aus dem Anfrageformular inklusive der von Ihnen angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter. Die Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO.
+    </div>
+
+    <div>
+      <strong>4. Keine Weitergabe an Dritte</strong><br/>
+      Wir verkaufen, handeln oder übertragen Ihre personenbezogenen Daten nicht an Dritte. Dies gilt nicht für vertrauenswürdige Dritte, die uns bei der Durchführung unserer Website oder unseres Geschäfts unterstützen, sofern diese Parteien zustimmen, diese Informationen vertraulich zu behandeln.
+    </div>
+
+    <div>
+      <strong>5. Ihre Rechte</strong><br/>
+      Sie haben jederzeit das Recht auf:<br/>
+      – Auskunft über Ihre bei uns gespeicherten Daten (Art. 15 DSGVO)<br/>
+      – Berichtigung unrichtiger Daten (Art. 16 DSGVO)<br/>
+      – Löschung Ihrer Daten (Art. 17 DSGVO)<br/>
+      – Einschränkung der Verarbeitung (Art. 18 DSGVO)<br/>
+      – Datenübertragbarkeit (Art. 20 DSGVO)<br/>
+      – Widerspruch gegen die Verarbeitung (Art. 21 DSGVO)<br/><br/>
+      Zur Ausübung Ihrer Rechte wenden Sie sich bitte an: krauseplan.ingenieure@gmail.com
+    </div>
+
+    <div>
+      <strong>6. Beschwerderecht</strong><br/>
+      Sie haben das Recht, sich bei der zuständigen Aufsichtsbehörde zu beschweren. Die zuständige Aufsichtsbehörde in Brandenburg ist der Landesbeauftragte für den Datenschutz und für das Recht auf Akteneinsicht Brandenburg.
+    </div>
+
+    <div>
+      <strong>7. Aktualität dieser Datenschutzerklärung</strong><br/>
+      Diese Datenschutzerklärung ist aktuell gültig und hat den Stand April 2025.
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Krause Plan Ingenieure</div>
+  <p>© 2025 Krause Plan Ingenieure. Alle Rechte vorbehalten.</p>
+  <div>
+    <a href="#impressum">Impressum</a>
+    <a href="#datenschutz">Datenschutz</a>
+  </div>
+</footer>
+
+<script>
+  // Scroll-reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  reveals.forEach(r => io.observe(r));
+</script>
+</body>
+</html>
